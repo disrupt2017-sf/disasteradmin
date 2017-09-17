@@ -103,7 +103,7 @@ class ArcgisScene extends Component {
       )
     })
 
-    var this.
+    
     const points = this.state.real_points.map((point) => {
       // default
       var style = {

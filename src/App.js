@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Disaster Relief Portal</h2>
+          <h2>Ground Zero Truth</h2>
         </div>
         <ArcgisScene />
       </div>
