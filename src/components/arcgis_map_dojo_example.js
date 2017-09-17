@@ -56,7 +56,9 @@ class ArcgisScene extends Component {
       'esri/layers/FeatureLayer',
       'esri/geometry/Point',
       'esri/Graphic',
-      'esri/layers/support/Field'], (Map, MapView, FeatureLayer, Point, Graphic, Field) => {
+      'esri/layers/support/Field',
+      'esri/renderers/SimpleRenderer',
+      'esri/symbols/SimpleMarkerSymbol'], (Map, MapView, FeatureLayer, Point, Graphic, Field, SimpleRenderer, SimpleMarkerSymbol) => {
 
         let map = new Map({basemap: 'dark-gray'})
 
@@ -116,6 +118,18 @@ class ArcgisScene extends Component {
          })
         ];
 
+        // renderer
+        var renderer = new SimpleRenderer({
+          symbol: new SimpleMarkerSymbol({
+            size: 6,
+            color: "black",
+            outline: {
+              width: 0.5,
+              color: "white"
+            }
+          })
+        });
+
         // initialize feature layer
         var lyr = new FeatureLayer({
            fields: fields,
@@ -126,8 +140,8 @@ class ArcgisScene extends Component {
                            // popupTemplate and symbol are not required in each graphic
                            // since those are handled with the popupTemplate and
                            // renderer properties of the layer
-            popupTemplate: template
-            // renderer: uvRenderer  // UniqueValueRenderer based on `type` attribute
+            popupTemplate: template,
+            renderer: renderer  // UniqueValueRenderer based on `type` attribute
          });
 
         // Add Feature Layer to the map
