@@ -3,21 +3,16 @@ import { Scene, Layers, Geometry, Graphic, Symbols } from 'react-arcgis';
 import EsriLoader from 'esri-loader-react';
 import { dojoRequire } from 'esri-loader';
 import axios from 'axios';
-import { updatePoints } from '../api'
 
 class ArcgisScene extends Component {
 
   constructor(props) {
     super(props)
 
-    updatePoints((err, data) => this.setState({
-      real_points: data
-    }));
-
     this.state = {
       esriOptions: { url: 'https://js.arcgis.com/4.4/' },
       mapProperties: {
-        baseMap: 'satellite'
+        baseMap: 'hybrid'
       },
       viewProperties: {
         center: [-122.431297, 37.7749], // florida keys: [-80.447281, 25.086515]
@@ -49,19 +44,118 @@ class ArcgisScene extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://5920f809.ngrok.io/hashgraphdata')
-      .then(res => {
-        this.setState({real_points: res.data})
-      })
+    setInterval(() => {
+      axios.get('http://64a066dc.ngrok.io/hashgraphdata')
+        .then(res => {
+          this.setState({real_points: res.data})
+        })
+    }, 5000);
   }
 
   render() {
     console.log('real points', this.state.real_points)
-    const points = this.state.real_points.map((point) => {
+    const hospitalsList = [
+        {
+          latitude: 37.755634,
+          longitude: -122.403748
+        },
+        {
+          latitude: 37.773972,
+          longitude: -122.431297
+        },
+        {
+          latitude: 37.795478,
+          longitude: -122.409183
+        }
+
+    ]
+
+    const hospitals = hospitalsList.map((staticPoint) => {
+      var style = {
+          color: [76, 128, 255],
+          outline: {
+              color: [0, 128, 0],
+              width: 2
+          }
+      }
+
       return (
-        <Graphic key={point.latitude + point.longitude}>
+        <Graphic key={'hospital' + staticPoint.latitude + staticPoint.longitude}>
           <Symbols.SimpleMarkerSymbol
-              symbolProperties={this.state.symbolProperties}
+              symbolProperties={style}
+          />
+          <Geometry.Point
+              geometryProperties={{
+                  latitude: staticPoint.latitude,
+                  longitude: staticPoint.longitude
+              }}
+          />
+        </Graphic>
+      )
+    })
+
+    const points = this.state.real_points.map((point) => {
+      // default
+      var style = {
+          color: [226, 119, 40],
+          outline: {
+              color: [255, 255, 255],
+              width: 2
+          }
+      }
+
+      switch(point.crisis) {
+        case 'fire':
+          style.color = [255, 0, 0]
+          break;
+        case 'flood':
+          style.color = [40, 119, 226]
+          break;
+        case 'earthquake':
+          style.color = [128, 0, 128]
+          break;
+        default:
+          style.color = [16, 16, 16]
+      }
+
+      // if(!point.crisis) {
+      //   var style = {
+      //       color: [226, 119, 40],
+      //       outline: {
+      //           color: [255, 255, 255],
+      //           width: 2
+      //       }
+      //   }
+      // }
+      // if(point.crisis === 'fire'){
+      //   var style = {
+      //       color: [226, 119, 40],
+      //       outline: {
+      //           color: [255, 255, 255],
+      //           width: 2
+      //       }
+      //   }
+      // } else if (point.crisis === 'flood'){
+      //   var style = {
+      //       color: [40, 119, 226],
+      //       outline: {
+      //           color: [255, 255, 255],
+      //           width: 2
+      //       }
+      //   }
+      // } else if (point.crisis === 'hospital'){
+      //   var style = {
+      //       color: [40, 226, 78],
+      //       outline: {
+      //           color: [255, 255, 255],
+      //           width: 2
+      //       }
+      //   }
+      // }
+      return (
+        <Graphic key={point.phoneNumber + point.latitude + point.longitude}>
+          <Symbols.SimpleMarkerSymbol
+              symbolProperties={style}
           />
           <Geometry.Point
               geometryProperties={{
@@ -82,6 +176,7 @@ class ArcgisScene extends Component {
         >
           <Layers.GraphicsLayer>
             { points }
+            { hospitals }
           </Layers.GraphicsLayer>
           {/* <Layers.FeatureLayer
             layerProperties={{
