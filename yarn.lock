@@ -364,6 +364,13 @@ aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
+axios@^0.16.2:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.16.2.tgz#ba4f92f17167dfbab40983785454b9ac149c3c6d"
+  dependencies:
+    follow-redirects "^1.2.3"
+    is-buffer "^1.1.5"
+
 axobject-query@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-0.1.0.tgz#62f59dbc59c9f9242759ca349960e7a2fe3c36c0"
@@ -2130,7 +2137,7 @@ dateformat@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-2.0.0.tgz#2743e3abb5c3fc2462e527dca445e04e9f4dee17"
 
-debug@2.6.8, debug@^2.1.1, debug@^2.2.0, debug@^2.6.0, debug@^2.6.3, debug@^2.6.6, debug@^2.6.8:
+debug@2.6.8, debug@^2.1.1, debug@^2.2.0, debug@^2.4.5, debug@^2.6.0, debug@^2.6.3, debug@^2.6.6, debug@^2.6.8:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
   dependencies:
@@ -2724,6 +2731,14 @@ esrecurse@^4.1.0:
     estraverse "^4.1.0"
     object-assign "^4.0.1"
 
+esri-loader-react@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/esri-loader-react/-/esri-loader-react-1.0.1.tgz#b2752b9f737833c1482d60b9f305eef428c69e8f"
+
+esri-loader@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/esri-loader/-/esri-loader-1.1.0.tgz#5957f39a3708108a8b42b5c42928c127e39abed8"
+
 esri-promise@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/esri-promise/-/esri-promise-0.3.0.tgz#85e840838c971f7a1e870e60da65570915b0b189"
@@ -3086,6 +3101,12 @@ flatten@^1.0.2:
 flexibility@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/flexibility/-/flexibility-2.0.1.tgz#ad323aafc40f469ce624286518fc4d7cd72b7c77"
+
+follow-redirects@^1.2.3:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.2.4.tgz#355e8f4d16876b43f577b0d5ce2668b9723214ea"
+  dependencies:
+    debug "^2.4.5"
 
 for-each@~0.3.2:
   version "0.3.2"

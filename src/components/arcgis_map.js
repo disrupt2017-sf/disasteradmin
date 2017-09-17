@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Scene, Layers, Geometry, Graphic, Symbols } from 'react-arcgis';
+import EsriLoader from 'esri-loader-react';
+import { dojoRequire } from 'esri-loader';
+import axios from 'axios';
 
 class ArcgisScene extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
+      esriOptions: { url: 'https://js.arcgis.com/4.4/' },
       mapProperties: {
         baseMap: 'satellite'
       },
@@ -19,36 +24,43 @@ class ArcgisScene extends Component {
               width: 2
           }
       },
-      points: [
+      test_points: [
           {
-            lat: 37.7749,
-            lng: -122.431297
+            latitude: 47.2529,
+            longitude: -122.4443
           },
           {
-            lat: 37.781975,
-            lng: -122.449335
+            latitude: 47.2529,
+            longitude: -122.449335
           },
           {
-            lat: 37.778393,
-            lng: -122.410646
+            latitude: 37.778393,
+            longitude: -122.410646
           }
-      ]
+      ],
+      real_points: []
     }
   }
 
-
+  componentDidMount() {
+    axios.get('http://5920f809.ngrok.io/hashgraphdata')
+      .then(res => {
+        this.setState({real_points: res.data})
+      })
+  }
 
   render() {
-    const points = this.state.points.map( (point) => {
+    console.log('real points', this.state.real_points)
+    const points = this.state.real_points.map((point) => {
       return (
-        <Graphic key={point.lat + point.lng}>
+        <Graphic key={point.latitude + point.longitude}>
           <Symbols.SimpleMarkerSymbol
               symbolProperties={this.state.symbolProperties}
           />
           <Geometry.Point
               geometryProperties={{
-                  latitude: point.lat,
-                  longitude: point.lng
+                  latitude: point.latitude,
+                  longitude: point.longitude
               }}
           />
         </Graphic>
@@ -56,15 +68,23 @@ class ArcgisScene extends Component {
     })
 
     return (
-      <Scene
-        style={{ width: '100vw', height: '100vh' }}
-        mapProperties={this.state.mapProperties}
-        viewProperties={this.state.viewProperties}
-      >
-        <Layers.GraphicsLayer>
-          { points }
-        </Layers.GraphicsLayer>
-      </Scene>
+      <div>
+        <Scene
+          style={{ width: '100vw', height: '100vh' }}
+          mapProperties={this.state.mapProperties}
+          viewProperties={this.state.viewProperties}
+        >
+          <Layers.GraphicsLayer>
+            { points }
+          </Layers.GraphicsLayer>
+          {/* <Layers.FeatureLayer
+            layerProperties={{
+              url: 'https://services6.arcgis.com/eIF8pWUENRGiMcYy/arcgis/rest/services/Hospitals/FeatureServer/0'
+            }}
+          /> */}
+        </Scene>
+      </div>
+
     )
   }
 }

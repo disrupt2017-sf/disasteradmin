@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+// import ArcgisScene from './components/arcgis_map_dojo_example'
 import ArcgisScene from './components/arcgis_map'
 
 class App extends Component {
@@ -12,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Disaster Relief</h2>
+          <h2>Disaster Relief Portal</h2>
         </div>
         <ArcgisScene />
       </div>
