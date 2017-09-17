@@ -74,8 +74,8 @@ class ArcgisScene extends Component {
       var style = {
           color: [76, 128, 255],
           outline: {
-              color: [0, 128, 0],
-              width: 2
+              color: [236, 236, 236],
+              width: 4
           }
       }
 
@@ -109,7 +109,7 @@ class ArcgisScene extends Component {
           style.color = [255, 0, 0]
           break;
         case 'flood':
-          style.color = [40, 119, 226]
+          style.color = [65, 169, 76]
           break;
         case 'earthquake':
           style.color = [128, 0, 128]
@@ -118,40 +118,6 @@ class ArcgisScene extends Component {
           style.color = [16, 16, 16]
       }
 
-      // if(!point.crisis) {
-      //   var style = {
-      //       color: [226, 119, 40],
-      //       outline: {
-      //           color: [255, 255, 255],
-      //           width: 2
-      //       }
-      //   }
-      // }
-      // if(point.crisis === 'fire'){
-      //   var style = {
-      //       color: [226, 119, 40],
-      //       outline: {
-      //           color: [255, 255, 255],
-      //           width: 2
-      //       }
-      //   }
-      // } else if (point.crisis === 'flood'){
-      //   var style = {
-      //       color: [40, 119, 226],
-      //       outline: {
-      //           color: [255, 255, 255],
-      //           width: 2
-      //       }
-      //   }
-      // } else if (point.crisis === 'hospital'){
-      //   var style = {
-      //       color: [40, 226, 78],
-      //       outline: {
-      //           color: [255, 255, 255],
-      //           width: 2
-      //       }
-      //   }
-      // }
       return (
         <Graphic key={point.phoneNumber + point.latitude + point.longitude}>
           <Symbols.SimpleMarkerSymbol
