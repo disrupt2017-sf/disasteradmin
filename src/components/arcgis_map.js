@@ -66,15 +66,22 @@ class ArcgisScene extends Component {
         {
           latitude: 37.795478,
           longitude: -122.409183
+        },
+        {
+          latitude: 37.764855,
+          longitude: -122.390270
+        },
+        {
+          latitude: 37.763089,
+          longitude: -122.457814
         }
-
     ]
 
     const hospitals = hospitalsList.map((staticPoint) => {
       var style = {
           color: [76, 128, 255],
           outline: {
-              color: [236, 236, 236],
+              color: [255, 100, 80],
               width: 4
           }
       }
@@ -106,7 +113,7 @@ class ArcgisScene extends Component {
 
       switch(point.crisis) {
         case 'fire':
-          style.color = [255, 0, 0]
+          style.color = [255, 165, 0]
           break;
         case 'flood':
           style.color = [65, 169, 76]
