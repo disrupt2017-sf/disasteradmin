@@ -47,7 +47,9 @@ class ArcgisScene extends Component {
     setInterval(() => {
       axios.get('http://64a066dc.ngrok.io/hashgraphdata')
         .then(res => {
-          this.setState({real_points: res.data})
+          if(Array.isArray(res.data)){
+            this.setState({real_points: res.data})
+          }
         })
     }, 5000);
   }
@@ -101,6 +103,7 @@ class ArcgisScene extends Component {
       )
     })
 
+    var this.
     const points = this.state.real_points.map((point) => {
       // default
       var style = {
