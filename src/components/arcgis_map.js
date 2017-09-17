@@ -3,11 +3,17 @@ import { Scene, Layers, Geometry, Graphic, Symbols } from 'react-arcgis';
 import EsriLoader from 'esri-loader-react';
 import { dojoRequire } from 'esri-loader';
 import axios from 'axios';
+import { updatePoints } from '../api'
 
 class ArcgisScene extends Component {
 
   constructor(props) {
     super(props)
+
+    updatePoints((err, data) => this.setState({
+      real_points: data
+    }));
+
     this.state = {
       esriOptions: { url: 'https://js.arcgis.com/4.4/' },
       mapProperties: {
