@@ -45,7 +45,7 @@ class ArcgisScene extends Component {
 
   componentDidMount() {
     setInterval(() => {
-      axios.get('http://64a066dc.ngrok.io/hashgraphdata')
+      axios.get('http://03220314.ngrok.io/hashgraphdata')
         .then(res => {
           if(Array.isArray(res.data)){
             this.setState({real_points: res.data})
